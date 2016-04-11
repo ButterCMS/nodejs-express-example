@@ -10,11 +10,13 @@ app.set('view engine', 'jade');
 // Routes
 app.get('/', renderHome)
 app.get('/p/:page', renderHome)
-app.get('/:slug', renderPost)
 app.get('/category/:slug', renderCategory)
 app.get('/author/:slug', renderAuthor)
 app.get('/rss', renderRss)
 app.get('/atom', renderAtom)
+app.get('/sitemap', renderSitemap)
+// Make sure this route is last
+app.get('/:slug', renderPost)
 
 app.listen(3000)
 
@@ -78,7 +80,14 @@ function renderRss(req, res) {
   res.set('Content-Type', 'text/xml');
 
   butter.feed.retrieve('rss').then(function(resp) {
-    console.log('hi')
+    res.send(resp.data.data)
+  })
+}
+
+function renderSitemap(req, res) {
+  res.set('Content-Type', 'text/xml');
+
+  butter.feed.retrieve('sitemap').then(function(resp) {
     res.send(resp.data.data)
   })
 }
