@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h2 #{post.title}
+
+  | by 
+  a(href="/author/#{post.author.slug}") #{post.author.first_name} #{post.author.last_name}
+
+  | on 
+
+  | #{new Date(post.published).getDate()}/#{new Date(post.published).getMonth()+1}/#{new Date(post.published).getFullYear()}
+
+  if post.categories.length > 0
+    |  in 
+    each category, index in post.categories
+      if index != 0
+        | , 
+      a(href="/category/#{category.slug}") #{category.name}
+
+  br
+
+  !{post.body}

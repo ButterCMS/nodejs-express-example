@@ -1,0 +1,15 @@
+extends layout
+include mixins/post_preview
+
+block content
+  each post in posts
+    +post_preview(post)
+    br
+
+  br
+
+  if previous_page
+    a(href="/p/#{previous_page}") Prev
+
+  if next_page
+    a(href="/p/#{next_page}") Next

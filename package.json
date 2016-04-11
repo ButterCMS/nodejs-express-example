@@ -1,0 +1,19 @@
+{
+  "name": "buttercms-node-example",
+  "description": "ButterCMS Express Example",
+  "engines": {
+    "node": ">=0.10.32"
+  },
+  "homepage": "https://github.com/buttercms/buttercms-node-example",
+  "author": "ButterCMS <support@buttercms.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/buttercms/buttercms-node-example.git"
+  },
+  "dependencies": {
+    "buttercms": "~1.0.3",
+    "express": "~4.13.4",
+    "jade": "~1.11.0"
+  },
+  "license": "MIT"
+}

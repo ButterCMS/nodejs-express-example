@@ -1,0 +1,12 @@
+mixin post_preview(post)
+  a(href="/#{post.slug}") #{post.title}
+
+  |  by 
+  a(href="/author/#{post.author.slug}") #{post.author.first_name} #{post.author.last_name}
+
+  if post.categories.length > 0
+    |  in 
+    each category, index in post.categories
+      if index != 0
+        | , 
+      a(href="/category/#{category.slug}") #{category.name}

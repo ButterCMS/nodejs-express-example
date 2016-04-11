@@ -1,0 +1,9 @@
+extends layout
+include mixins/post_preview
+
+block content
+  h2 #{author.first_name} #{author.last_name}
+
+  each post in author.recent_posts
+    +post_preview(post)
+    br
