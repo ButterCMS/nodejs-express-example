@@ -1,0 +1,6 @@
+<h2><%= author.name %></h2>
+
+<% author.recent_posts.forEach(function(post) { %>
+  <a href="/blog/<%= post.slug %>"><%= post.title %></a> by <%= post.author.first_name %> <%= post.author.last_name %>
+  <br>
+<% }); %>

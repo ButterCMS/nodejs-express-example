@@ -1,9 +1,0 @@
-extends layout
-include mixins/post_preview
-
-block content
-  h2 #{category.name}
-
-  each post in category.recent_posts
-    +post_preview(post)
-    br

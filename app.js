@@ -2,30 +2,35 @@
 
 const express = require('express');
 const butter = require('buttercms')('b60a008584313ed21803780bc9208557b3b49fbb');
+const app = express()
 
-var app = express()
-
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // Routes
-app.get('/', renderHome)
-app.get('/p/:page', renderHome)
+app.get('/blog', renderHome)
+app.get('/blog/p/:page', renderHome)
+app.get('/blog/:slug', renderPost)
+
 app.get('/category/:slug', renderCategory)
 app.get('/author/:slug', renderAuthor)
+
 app.get('/rss', renderRss)
 app.get('/atom', renderAtom)
 app.get('/sitemap', renderSitemap)
-// Make sure this route is last
-app.get('/:slug', renderPost)
 
+// Start server
 app.listen(3000)
+
+// Redirect root to blog
+app.get('/', function(req, res) {
+  res.redirect('/blog');
+});
 
 function renderHome(req, res) {
   var page = req.params.page || 1;
 
   butter.post.list({page_size: 10, page: page}).then(function(resp) {
     res.render('index', {
-      title: 'Blog Homepage',
       posts: resp.data.data,
       next_page: resp.data.meta.next_page,
       previous_page: resp.data.meta.previous_page
@@ -39,7 +44,8 @@ function renderPost(req, res) {
   butter.post.retrieve(slug).then(function(resp) {
     res.render('post', {
       title: resp.data.data.title,
-      post: resp.data.data
+      post: resp.data.data,
+      published: new Date(resp.data.data.published)
     })
   })
 }
