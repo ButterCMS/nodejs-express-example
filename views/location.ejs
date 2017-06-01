@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><%= category.name %></title>
+    <title><%= location.name %></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -32,31 +32,23 @@
 
 <body>
 
-    <!-- Callout -->
-    <aside class="callout">
+    <!-- Header -->
+    <header id="top" class="header" style="color: #FFF; background: url(<%= location.feature_image %>) no-repeat center center scroll;">
         <div class="text-vertical-center">
-            <h1><%= category.name %></h1>
+            <h1><%= location.name %></h1>
+            <h3><%= location.description %> </h3>
         </div>
-    </aside>
+    </header>
 
-    <!-- Portfolio -->
     <section id="portfolio" class="portfolio">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <p class="lead"><a href="/">&lt; Home</a>
-                    <% category.recent_posts.forEach(function(post) { %>
-                        <p class="lead"><a href="/blog/<%= post.slug %>"><%= post.title %></a> by <%= post.author.first_name %> <%= post.author.last_name %></p>
-                        <p><%= post.summary %></p>
-                    <% }); %>                    
+                    <%- location.body %>
                 </div>
-                <!-- /.col-lg-10 -->
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container -->
     </section>
-
 
     <!-- Footer -->
     <footer>
@@ -79,10 +71,10 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
     
 </body>

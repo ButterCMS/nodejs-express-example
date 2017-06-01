@@ -1,5 +1,7 @@
 # ButterCMS Express.js Example
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 This app uses EJS templates but ButterCMS works with any templating engine like Jade, Mustache, or React.
 
 ## Get Started
