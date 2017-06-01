@@ -1,0 +1,14 @@
+<h2>Home</h2>
+
+<% posts.forEach(function(post) { %>
+  <a href="/blog/<%= post.slug %>"><%= post.title %></a> by <%= post.author.first_name %> <%= post.author.last_name %>
+  <br>
+<% }); %>
+
+<% if (previous_page) { %>
+  <a href="/blog/p/<%= previous_page %>">Prev</a>
+<% } %>
+
+<% if (next_page) { %>
+  <a href="/blog/p/<%= next_page %>">Next</a>
+<% } %>

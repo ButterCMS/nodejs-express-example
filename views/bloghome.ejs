@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><%= category.name %></title>
+    <title>Blog Home</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -32,33 +32,26 @@
 
 <body>
 
-    <!-- Callout -->
     <aside class="callout">
         <div class="text-vertical-center">
-            <h1><%= category.name %></h1>
+            <h1>Blog Home</h1>
         </div>
     </aside>
 
-    <!-- Portfolio -->
     <section id="portfolio" class="portfolio">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
                     <p class="lead"><a href="/">&lt; Home</a>
-                    <% category.recent_posts.forEach(function(post) { %>
-                        <p class="lead"><a href="/blog/<%= post.slug %>"><%= post.title %></a> by <%= post.author.first_name %> <%= post.author.last_name %></p>
-                        <p><%= post.summary %></p>
+                    <% posts.forEach(function(post) { %>
+                    <p class="lead"><a href="/blog/<%= post.slug %>"><%= post.title %></a> by <%= post.author.first_name %> <%= post.author.last_name %></p>
+                    <p><%= post.summary %></p>
                     <% }); %>                    
                 </div>
-                <!-- /.col-lg-10 -->
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container -->
     </section>
 
-
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
@@ -79,10 +72,10 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
     
 </body>

@@ -1,14 +1,15 @@
 'use strict';
 
 const express = require('express');
-const butter = require('buttercms')('b60a008584313ed21803780bc9208557b3b49fbb');
+const butter = require('buttercms')('e389441bfb10ccd3228e5adb47ccb98a8183eca7');
 const app = express()
 
+app.use(express.static('public'))
 app.set('view engine', 'ejs');
 
 // Routes
-app.get('/blog', renderHome)
-app.get('/blog/p/:page', renderHome)
+app.get('/', renderHome)
+app.get('/blog', renderBlogHome)
 app.get('/blog/:slug', renderPost)
 
 app.get('/category/:slug', renderCategory)
@@ -18,19 +19,51 @@ app.get('/rss', renderRss)
 app.get('/atom', renderAtom)
 app.get('/sitemap', renderSitemap)
 
-// Start server
-app.listen(3000)
+// Location Pages in Butter
+app.get('/locations/:slug', renderPage)
 
-// Redirect root to blog
-app.get('/', function(req, res) {
-  res.redirect('/blog');
-});
+// Start server
+app.listen(process.env.PORT || 3000)
+
+
+function renderPage(req, res) {
+  var slug = req.params.slug || 1;
+
+  butter.content.retrieve(['location_pages[slug='+slug+']']).then(function(resp) {
+    var content = resp.data.data;
+
+    // location_pages is a collection so we access the first and only item
+    var location = content.location_pages[0];
+
+    res.render('location', {
+      location: location
+    })
+  });
+}
 
 function renderHome(req, res) {
+
+  // Display list of location pages on our homepage.
+  butter.content.retrieve(['location_pages']).then(function(resp) {
+    var content = resp.data.data;
+    var location_pages = content.location_pages;
+
+    butter.post.list({page_size: 4, page: 1}).then(function(postResp) {
+      var posts = postResp.data.data;
+      
+      res.render('index', {
+        locations: location_pages,
+        posts: posts
+      })
+    });
+  });
+}
+
+function renderBlogHome(req, res) {
   var page = req.params.page || 1;
 
   butter.post.list({page_size: 10, page: page}).then(function(resp) {
-    res.render('index', {
+    res.render('bloghome', {
       posts: resp.data.data,
       next_page: resp.data.meta.next_page,
       previous_page: resp.data.meta.previous_page
