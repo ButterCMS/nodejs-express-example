@@ -3,10 +3,5 @@
 	"description": "A simple Node.js App with CMS functionality powered by ButterCMS.",
 	"repository": "https://github.com/ButterCMS/nodejs-express-example",
 	"logo": "https://pbs.twimg.com/profile_images/796730846459863040/obP9klmU.jpg",
-	"keywords": [
-	"node",
-	"express",
-	"buttercms",
-	"cms"
-	]
+	"keywords": [ "node", "express", "buttercms", "cms" ]
 }
